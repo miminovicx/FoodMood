@@ -68,7 +68,9 @@ router.get('/logout', (req, res) => {
  else {
    var err = new Error('You are not logged in!');
    err.status = 403;
-   next(err);
+   err.message = 'You are not logged in !';
+  //  next(err);
+   res.json({err: err});
  }
 });
  
