@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const config = require('../config');
 
 const url = config.mongoUrl[process.env.NODE_ENV || "prod"];
+var connectionOpened = false;
 
 const options = {
     useNewUrlParser: true,
@@ -22,6 +23,11 @@ mongoose.connection.on("error",() => {
 
 mongoose.connection.on("connected",() => {
     console.log("connection to database successfully established");
+});
+
+mongoose.connection.on("open", function() {
+    console.log("connection to database is open successfully");
+    connectionOpened = true;
 });
 
 mongoose.connection.on("disconnected",() => {

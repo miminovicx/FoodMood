@@ -1,9 +1,6 @@
 var config = {}
 
-config.secretKey = {
-    local: "hello",
-    prod: "nothello"
-};
+config.secretKey =  "hello";
 
 config.https = {
     keyPath: "...",

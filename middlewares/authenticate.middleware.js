@@ -1,32 +1,23 @@
-exports.isAuthenticated = (req,res,next) => {
-    if(true){
-        //not authenticated, or authenticated incorrectly
-        err = new Error("Unauthorized");
-        err.status = 401;
-        next(err);
-    } else {
-        next();
-    }
+/**
+ * @middleware Authenticate
+ */
+
+exports.isLogIn = (req,res,next) => {
+    if (!req.isAuthenticated()) return res.status(401).send({ message: "Unauthorized!" });
+    next();
 };
 
 exports.isUser = (req,res,next) => {
-    if(true){
-        //not authenticated, or authenticated incorrectly
+    if(req.isAuthenticated()){
         err = new Error("Not a user");
         err.status = 401;
         next(err);
     } else {
-        next();
+        res.redirect("/auth/login");
     }
 };
 
-exports.isSuperAdmin = (req,res,next) => {
-    if(true){
-        //not authenticated, or authenticated incorrectly
-        err = new Error("Not a super admin");
-        err.status = 401;
-        next(err);
-    } else {
-        next();
-    }
+exports.isUserId = (req,res,next) => {
+    if (req.isAuthenticated()) return req.user._id;
+      return null;
 };
