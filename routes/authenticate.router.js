@@ -19,7 +19,7 @@ var authenticate = require('../config/authenticate');
 
 //GET
 // Login  
-router.get('/', [controller.isLogIn] ,(req, res, next) =>{
+router.get('/', [controller.isLogIn],(req, res, next) =>{
     // Get all records
     User.find({})
       .then((users) => {

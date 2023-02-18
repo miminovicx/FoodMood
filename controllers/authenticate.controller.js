@@ -63,7 +63,11 @@ exports.logout =(req, res, next) => {
         req.session.destroy();
         req.logOut();
         res.clearCookie('session-id');
+        res.status = 210;
+        res.json({message:"ok bb"})
         res.redirect('/auth/login');
+       
+        
         }
         else {
         var err = new Error('You are not logged in!');
