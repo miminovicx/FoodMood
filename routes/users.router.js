@@ -11,16 +11,15 @@
  
 
  //GET
- // Espace utilisateur
+ // user account
  router.get("/", authenticate.isUser, controller.userAccount)
 
- // Modifier un utilisateur
+ // edit/update a user
  router.get("/edit/:userId", controller.updateUser)
  
  //DELETE
- // Suppression d'un utilisateur
+ // delete a user
  router.delete("/:userId", authenticate.isUser, controller.deleteUser)
-
-
+ 
  module.exports = router;
  
