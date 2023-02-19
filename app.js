@@ -9,7 +9,7 @@ var logger = require('morgan');
 var passport = require('passport');
 var session = require('express-session');
 var config = require('./config');
-
+var cors = require('cors');
 
 var app = express();
 
@@ -23,23 +23,25 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(cors(config.corsOptions));
+
 //passport initialization
 app.use(session({
-  secret: config.secretKey,
+  secret: "our-passport-local-strategy-app",
   resave: false,
   saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// import of the routes
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/authenticate.router');
-var usersRouter = require('./routes/user.router');
+var usersRouter = require('./routes/users.router');
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
+
 
 
 // catch 404 and forward to error handler
@@ -55,7 +57,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status = err.status || 500;
-  // res.render('error');
+  res.render('error');
 });
 
 module.exports = app;

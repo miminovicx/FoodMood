@@ -2,37 +2,30 @@
  * @controller Authenticate 
  */
 
-const User = require("../models/user.model");
+const User = require("../models/user");
 const passport = require("passport");
-var authenticate = require('../config/authenticate');
 
 
 exports.loginView = (req, res, next) => {
     res.render("auth/login", { message: req.flash("error") });
 };
 
-// logs in a user
+
 exports.loginUser = (req, res, next) => {
     passport.authenticate("local")(req, res, (err) => {
         if (err) {
             console.log(err);
         } else {
-            // Create a token
-            var token = authenticate.getToken({_id: req.user._id});
-            
-            // Response
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'application/json');
-            res.json({success: true, token: token, status: 'You are successfully logged in!'});
+            res.redirect("/users/test");
         }
     });
-};    
+};
 
 exports.registerView = (req, res, next) => {
     res.render("auth/register", { title: "OK" });
 };
 
-// adds a new user
+
 exports.addUser =(req, res, next) => {
     try {
         User.register(
@@ -40,7 +33,6 @@ exports.addUser =(req, res, next) => {
                 username: req.body.username,
                 email: req.body.email,
                 password: req.body.password,
-                admin: req.body.admin
             }),
             req.body.password,
             (err, user) => {
@@ -53,7 +45,7 @@ exports.addUser =(req, res, next) => {
                         res.statusCode = 200;
                         res.setHeader('Content-Type', 'application/json');
                         res.json({success: true, status: 'Registration Successful!'});
-                        // res.redirect("/auth/test");
+                        res.redirect("/auth/test");
                     });
                 }
             }
@@ -65,17 +57,15 @@ exports.addUser =(req, res, next) => {
     }
 };
 
-// logs out the user from the session
+
 exports.logout =(req, res, next) => {
     if (req.session) {
         req.session.destroy();
         req.logOut();
-        res.statusCode = 210; // status code to edit
-        res.setHeader('Content-Type', 'application/json');
         res.clearCookie('session-id');
-        res.json({status:"You are successfully logged out!"})
-        res.redirect('/auth/login');
-       
+        res.status = 210;
+        res.json({message:'You are successfully logged out!'})
+        // res.redirect('/auth/login');       
         }
         else {
         var err = new Error('You are not logged in!');
@@ -84,7 +74,6 @@ exports.logout =(req, res, next) => {
         }
 };
 
-// checks if the user is logged in
 exports.isLogIn = (req,res,next) => {
     if (!req.isAuthenticated()) return res.status(401).send({ message: "Unauthorized!" });
     next();

@@ -2,7 +2,7 @@
  * @controller Users
  */
 
-const User = require("../models/user.model");
+const User = require("../models/user");
 const usersMiddleware = require("../middlewares/user.middleware");
 const passport = require("passport");
 
@@ -13,7 +13,6 @@ var controller = {
         res.render("user/space", { user: req.user });
     },
 
-    // updates a user
     updateUser: async(req, res, next) => {
         try {
             let user = await User.findByIdAndUpdate(req.params.userId, req.body, {
@@ -29,7 +28,6 @@ var controller = {
         }
     },
 
-    // delete a user
     deleteUser: async(req, res, next) => {
         if (await usersMiddleware.isOwner(req.user._id, req.params.userId)) {
             try {
@@ -43,15 +41,6 @@ var controller = {
         } else {
             res.json({ status: 401, message: "Vous n'avez pas la permission." });
         }
-    },
-
-    // checks if the user is an admin
-    isAdmin: (req, res, next) => {
-    //     console.log(req.user._id);
-        if(!usersMiddleware.isAdmin(req.user._id)){
-            res.json({ status: 401, message: "Vous n'êtes pas admin." });   
-        }
-        next();
     },
 };
 

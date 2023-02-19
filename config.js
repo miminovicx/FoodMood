@@ -7,13 +7,12 @@ config.https = {
     certPath: "..."
 };
 
-// cors whitelisted urls in prod and dev environments
-config.cors = {
-    whitelist: {
-        local: [],
-        prod: [],
-    }
-};
+// cors options
+config.corsOptions = {
+    origin: 'http://localhost:3000/',
+    methods: ["POST"],
+    optionsSuccessStatus: 200
+}
 
 // database urls for prod and dev envs
 config.mongoUrl = {
