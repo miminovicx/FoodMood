@@ -2,7 +2,7 @@ var passport = require("passport");
 var config = require('../config.js');
  
 // User model
-var User = require('../models/user');
+var User = require('../models/user.model');
  
 // Strategies
 var JwtStrategy = require('passport-jwt').Strategy;

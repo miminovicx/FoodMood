@@ -2,7 +2,7 @@
  * @router Authenticate
  */
 
-let user = require("../controllers/users.controller");
+let user = require("../models/user.model");
 var express = require("express");
 var router = express.Router();
 var controller = require("../controllers/authenticate.controller");

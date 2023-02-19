@@ -35,7 +35,7 @@ app.use(passport.session());
 // import of the routes
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/authenticate.router');
-var usersRouter = require('./routes/users.router');
+var usersRouter = require('./routes/user.router');
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);

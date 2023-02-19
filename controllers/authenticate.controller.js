@@ -2,7 +2,7 @@
  * @controller Authenticate 
  */
 
-const User = require("../models/user");
+const User = require("../models/user.model");
 const passport = require("passport");
 var authenticate = require('../config/authenticate');
 

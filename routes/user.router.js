@@ -2,10 +2,10 @@
  * @router User
  */
 
- let User = require("../models/user");
+ let User = require("../models/user.model");
  var express = require("express");
  var router = express.Router();
- var controller = require("../controllers/users.controller");
+ var controller = require("../controllers/user.controller");
  const passport = require('passport');
  var authenticate = require("../middlewares/authenticate.middleware");
  

@@ -2,7 +2,7 @@
  * @controller Users
  */
 
-const User = require("../models/user");
+const User = require("../models/user.model");
 const usersMiddleware = require("../middlewares/user.middleware");
 const passport = require("passport");
 

@@ -2,7 +2,7 @@
  * @middleware User
  */
 
-const User = require("../models/user");
+const User = require("../models/user.model");
 
 // checks if the user already exists
 exports.checkIfUserExist = (userId) => {
