@@ -5,17 +5,21 @@ exports.mainView = (req, res, next) => {
 };
 
 // main process
-exports.process = (req, res, next) => {
+exports.process = async (req, res, next) => {
     try {
+        // parsing request
         let ingredients = req.body.ingredients;
         let nbRecipes = req.body.nbRecipes;
         let maximize = req.body.maximize;
 
-        let recipesJson = mainMiddleware.getRecipesJson(ingredients,nbRecipes,maximize);
-        // console.log(recipesJson);
+        // getting recipes from spoonacular api
+        let recipesJson = await mainMiddleware.getRecipesJson(ingredients,nbRecipes,maximize);
+
+        // let shortRecipesJson = mainMiddleware.getShortRecipesFromJson(recipesJson);
+
         res.setHeader('Content-Type', 'application/json');
         res.status = 200;
-        res.json({body : recipe});
+        res.json(recipesJson);
 
     } catch (error) {
         console.error(err);

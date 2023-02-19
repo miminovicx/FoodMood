@@ -6,24 +6,27 @@ let API_URL = "https://api.spoonacular.com/recipes/findByIngredients"
 let mainMiddleware = {
     getRecipesJson: async (ingredients,nbRecipes,maximize) => {
         try {
+            // if(!ingredients) res.json(err)
+
+            // setting default values
+            if(!nbRecipes) nbRecipes = 1;
+            if(!maximize) maximize = 2;
+
             // building url for the request
             let url =
               API_URL + "?apiKey=" + API_KEY + 
-              "&ingredients=" + ingredients ;
-              if(nbRecipes) url += "&number=" + nbRecipes;
-              if(maximize) url += "&ranking=" + maximize;
+              "&ingredients=" + ingredients + 
+              "&number=" + nbRecipes +
+               "&ranking=" + maximize;
       
-            console.log(url);
             let settings = { method: "Get" };
-            let out;
       
-            await fetch(url, settings)
+            let out = await fetch(url, settings)
               .then((res) => res.json())
               .then((json) => {
-                out = json;
+                return json;
             });
-
-            console.log(out);
+            
             return out;
         } catch (err) {
             console.error(err);
