@@ -9,7 +9,8 @@ var logger = require('morgan');
 var passport = require('passport');
 var session = require('express-session');
 var config = require('./config');
-var cors = require('cors');
+const cors = require('cors');
+const helmet = require('helmet');
 
 var app = express();
 
@@ -23,14 +24,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// enabling cors
 app.use(cors(config.corsOptions));
+
+// enabling helmet
+app.use(helmet(config.helmetOptions));
 
 //passport initialization
 app.use(session({
   secret: "our-passport-local-strategy-app",
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  name: "sessionId"
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 

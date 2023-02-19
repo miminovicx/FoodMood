@@ -34,7 +34,7 @@ mongoose.connection.on("connected", function() {
 });
 
 mongoose.connection.on("open", function() {
-    console.log(chalk.black("         OPEN "), chalk.green("Connection to the database is open successfully."));
+    console.log(chalk.black("   OPEN       "), chalk.green("Connection to the database is open successfully."));
     connectionOpened = true;
 });
 

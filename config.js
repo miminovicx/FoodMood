@@ -10,8 +10,13 @@ config.https = {
 // cors options
 config.corsOptions = {
     origin: 'http://localhost:3000/',
-    methods: ["POST"],
+    methods: "POST,GET",
     optionsSuccessStatus: 200
+}
+
+// helmet options
+config.helmetOptions = {
+
 }
 
 // database urls for prod and dev envs

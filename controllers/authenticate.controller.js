@@ -62,7 +62,7 @@ exports.logout =(req, res, next) => {
     if (req.session) {
         req.session.destroy();
         req.logOut();
-        res.clearCookie('session-id');
+        res.clearCookie('sessionId');
         res.status = 210;
         res.json({message:'You are successfully logged out!'})
         // res.redirect('/auth/login');       
