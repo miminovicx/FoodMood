@@ -44,11 +44,12 @@ app.use(passport.session());
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/authenticate.router');
 var usersRouter = require('./routes/users.router');
+var mainRouter = require('./routes/main.routes');
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
-
+app.use('/home', mainRouter);
 
 
 // catch 404 and forward to error handler
