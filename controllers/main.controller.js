@@ -7,13 +7,24 @@ exports.mainView = (req, res, next) => {
 // main process
 exports.process = async (req, res, next) => {
     try {
+        // (ingredients,cuisine, excludeCuisine, diet, intolerances, 
+            // excludeIngredients, instructionsRequired, maxReadyTime, number) 
+
         // parsing request
         let ingredients = req.body.ingredients;
-        let nbRecipes = req.body.nbRecipes;
-        let maximize = req.body.maximize;
+        let cuisine = req.body.cuisine;
+        let excludeCuisine = req.body.excludeCuisine;
+        let diet = req.body.diet;
+        let intolerances = req.body.intolerances;
+        let excludeIngredients = req.body.excludeIngredients;
+        let maxReadyTime = req.body.maxReadyTime;
+        let number = req.body.number;
+        
 
         // getting recipes from spoonacular api
-        let recipesJson = await mainMiddleware.getRecipesJson(ingredients,nbRecipes,maximize);
+        let recipesJson = await mainMiddleware.getRecipesJson(ingredients,cuisine, excludeCuisine, 
+                                                        diet, intolerances, excludeIngredients, 
+                                                        maxReadyTime, number);
 
         // let shortRecipesJson = mainMiddleware.getShortRecipesFromJson(recipesJson);
 
