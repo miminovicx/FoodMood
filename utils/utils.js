@@ -12,6 +12,21 @@ var utils = {
             ingredients.push(ingredientJson)
         }
         return ingredients;
+    },
+
+    getInstructions: (steps) => {
+        let instructions = [];
+
+        for(var i = 0; i < steps.length; i++){
+            // let step = steps[i]['number'] + "- " + steps[i]['step'];
+            let step = JSON.parse(JSON.stringify({
+                "step" : steps[i]['number'],
+                "instruction" : steps[i]['step']
+            }));
+            instructions.push(step);
+        }
+        
+        return instructions;
     }
 }
 

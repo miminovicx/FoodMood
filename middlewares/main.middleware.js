@@ -60,14 +60,17 @@ let mainMiddleware = {
             let unusedIngredients = utils.getIngredientsFromComplexArray(recipe['unusedIngredients']);
             let missingIngredients = utils.getIngredientsFromComplexArray(recipe['missedIngredients']);
 
+            let instructions = utils.getInstructions(recipe['analyzedInstructions'][0]['steps']);
+
             let cleanRecipe = JSON.parse(JSON.stringify({
                 "id" : id,
                 "title" : title,
                 "readyInMinutes" : readyInMinutes,
-                "image" : image,
                 "usedIngredients" : usedIngredients,
                 "unusedIngredients" : unusedIngredients,
-                "missingIngredients" : missingIngredients
+                "missingIngredients" : missingIngredients,
+                "instructions" : instructions,
+                "image" : image
             }));
 
             return cleanRecipe;
