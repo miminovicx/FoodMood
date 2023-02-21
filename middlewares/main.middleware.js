@@ -15,7 +15,7 @@ let mainMiddleware = {
             
             let fillIngredients = true;
             let addRecipeInformation = true;
-            let addRecipeNutrition = false;
+            let addRecipeNutrition = true;
         
             // building url for the request
             let url = API_URL + "?apiKey=" + API_KEY + "&fillIngredients=" + fillIngredients 
@@ -62,6 +62,8 @@ let mainMiddleware = {
 
             let instructions = utils.getInstructions(recipe['analyzedInstructions'][0]['steps']);
 
+            let nutrition = utils.getNutrition(recipe['nutrition']['nutrients']);
+
             let cleanRecipe = JSON.parse(JSON.stringify({
                 "id" : id,
                 "title" : title,
@@ -70,7 +72,8 @@ let mainMiddleware = {
                 "unusedIngredients" : unusedIngredients,
                 "missingIngredients" : missingIngredients,
                 "instructions" : instructions,
-                "image" : image
+                "image" : image,
+                "nutrition" : nutrition
             }));
 
             return cleanRecipe;

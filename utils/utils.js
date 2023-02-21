@@ -18,7 +18,6 @@ var utils = {
         let instructions = [];
 
         for(var i = 0; i < steps.length; i++){
-            // let step = steps[i]['number'] + "- " + steps[i]['step'];
             let step = JSON.parse(JSON.stringify({
                 "step" : steps[i]['number'],
                 "instruction" : steps[i]['step']
@@ -27,6 +26,20 @@ var utils = {
         }
         
         return instructions;
+    },
+
+    getNutrition: (nutrients) => {
+        let result = [];
+
+        for(var i = 0; i < nutrients.length; i++){
+            let nutrient = JSON.parse(JSON.stringify({
+                "name" : nutrients[i]['name'],
+                "amount" : nutrients[i]['amount'] + " " + nutrients[i]['unit']
+            }));
+            result.push(nutrient);
+        }
+
+        return result;
     }
 }
 

@@ -31,6 +31,7 @@ exports.process = async (req, res, next) => {
         res.setHeader('Content-Type', 'application/json');
         res.status = 200;
 
+        // res.json(recipeJson);
         res.json(cleanRecipeJson);
 
     } catch (err) {
