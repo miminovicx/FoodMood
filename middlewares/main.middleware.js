@@ -1,14 +1,17 @@
 const fetch = require("node-fetch");
+const { use } = require("passport");
+var utils = require('../utils/utils.js');
 
 let API_KEY = "ba86d73b307849fbbe7c6c6b20341aab";
 let API_URL = "https://api.spoonacular.com/recipes/complexSearch"
 
 let mainMiddleware = {
-    getRecipesJson: async (ingredients,cuisine, excludeCuisine, diet, intolerances, 
+
+    getRecipeJson: async (ingredients,cuisine, excludeCuisine, diet, intolerances, 
                         excludeIngredients, maxReadyTime, number) => {
         try {            
             // a voir
-            // let instructionsRequired=true
+            let instructionsRequired=true
             
             let fillIngredients = true;
             let addRecipeInformation = true;
@@ -17,7 +20,8 @@ let mainMiddleware = {
             // building url for the request
             let url = API_URL + "?apiKey=" + API_KEY + "&fillIngredients=" + fillIngredients 
                     + "&addRecipeInformation=" + addRecipeInformation
-                    + "&addRecipeNutrition=" + addRecipeNutrition;
+                    + "&addRecipeNutrition=" + addRecipeNutrition
+                    + "&instructionsRequired" + instructionsRequired;
 
             if(ingredients) url += "&includeIngredients=" + ingredients;
             if(cuisine) url += "&cuisine=" + cuisine;
@@ -27,8 +31,6 @@ let mainMiddleware = {
             if(excludeIngredients) url += "&excludeIngredients=" + excludeIngredients;
             if(maxReadyTime) url += "&maxReadyTime=" + maxReadyTime;
             if(number) url += "&number=" + number;
-
-            // console.log("url = ",url);
 
             let settings = { method: "Get" };
       
@@ -44,8 +46,36 @@ let mainMiddleware = {
             next(err);
         }
         return false;
-    }
+    },
 
+    getCleanRecipeJson: (recipeJson) => {
+        try {
+            let recipe = recipeJson['results'][0];
+            let id = recipe['id'];
+            let title = recipe['title'];
+            let readyInMinutes = recipe['readyInMinutes'];
+            let image = recipe['image'];
+            
+            let usedIngredients = utils.getIngredientsFromComplexArray(recipe['usedIngredients']);
+            let unusedIngredients = utils.getIngredientsFromComplexArray(recipe['unusedIngredients']);
+            let missingIngredients = utils.getIngredientsFromComplexArray(recipe['missedIngredients']);
+
+            let cleanRecipe = JSON.parse(JSON.stringify({
+                "id" : id,
+                "title" : title,
+                "readyInMinutes" : readyInMinutes,
+                "image" : image,
+                "usedIngredients" : usedIngredients,
+                "unusedIngredients" : unusedIngredients,
+                "missingIngredients" : missingIngredients
+            }));
+
+            return cleanRecipe;
+        } catch (err) {
+            console.error(err);
+            next(err);
+        }
+    }
 };
 
 module.exports = mainMiddleware;

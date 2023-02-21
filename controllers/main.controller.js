@@ -22,17 +22,18 @@ exports.process = async (req, res, next) => {
         
 
         // getting recipes from spoonacular api
-        let recipesJson = await mainMiddleware.getRecipesJson(ingredients,cuisine, excludeCuisine, 
+        let recipeJson = await mainMiddleware.getRecipeJson(ingredients,cuisine, excludeCuisine, 
                                                         diet, intolerances, excludeIngredients, 
                                                         maxReadyTime, number);
 
-        // let shortRecipesJson = mainMiddleware.getShortRecipesFromJson(recipesJson);
+        let cleanRecipeJson = mainMiddleware.getCleanRecipeJson(recipeJson);
 
         res.setHeader('Content-Type', 'application/json');
         res.status = 200;
-        res.json(recipesJson);
 
-    } catch (error) {
+        res.json(cleanRecipeJson);
+
+    } catch (err) {
         console.error(err);
         next(err);   
     }
