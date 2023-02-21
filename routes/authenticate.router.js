@@ -35,6 +35,9 @@ router.get('/', [controller.isLogIn],(req, res, next) =>{
 //Register
 router.get("/register", controller.registerView);
 
+//Login
+router.get("/login", controller.loginView);
+
 //Logout
 router.get("/logout", controller.logout);
 
@@ -44,12 +47,13 @@ router.get("/logout", controller.logout);
 router.post('/login', passport.authenticate('local'), (req, res) => {
  
     // Create a token
-    var token = authenticate.getToken({_id: req.user._id});
+    // var token = authenticate.getToken({_id: req.user._id});
     
-    // Response
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json({success: true, token: token, status: 'You are successfully logged in!'});
+    // // Response
+    // res.statusCode = 200;
+    // res.setHeader('Content-Type', 'application/json');
+    // res.json({success: true, token: token, status: 'You are successfully logged in!'});
+    res.redirect('/home/');
    });
      
 
