@@ -1,7 +1,19 @@
-doctype html
+// - Header Layout
+
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    title Food Mood
+    block css
+        link(rel='stylesheet', href='/stylesheets/style.min.css', type="text/css")
   body
-    block content
+  
+  nav(class="navbar navbar-expand-lg navbar-dark bg-dark")
+  .container-fluid
+    a(class="navbar-brand" href="/home") 
+    img.d-inline-block.align-top(src='./public/foodmoodicon' width='30' height='30' alt='' href="/home")
+    |     Home
+    div(class="collapse navbar-collapse" id="navbarNavAltMarkup")
+      div(class="navbar-nav")
+        a(class="nav-link" href="/auth/register") Register
+        a(class="nav-link" href="/auth/login") Login
+        a(class="nav-link active" aria-current="page" href="/auth/logout") Logout

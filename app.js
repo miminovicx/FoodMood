@@ -53,16 +53,6 @@ app.use('/auth', authRouter);
 app.use('/users', usersRouter);
 app.use('/home', mainRouter);
 
-// const options={
-//     key : fs.readFileSync(path.join(__dirname,'./cert/key.pem')),
-//     cert : fs.readFileSync(path.join(__dirname,'./cert/cert.pem'))
-// }
-
-// const sslServer = https.createServer(options,app);
-// // sslServer.listen(3000 ,() => {
-// //   console.log('Secure server is listening on port 3000');
-// // });
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

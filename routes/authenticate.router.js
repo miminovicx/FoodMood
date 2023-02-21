@@ -7,9 +7,6 @@ var express = require("express");
 var router = express.Router();
 var controller = require("../controllers/authenticate.controller");
 const passport = require("passport");
-var authenticate = require("../middlewares/authenticate.middleware");
-
-
 
 // Parse Json
 const bodyParser = require('body-parser');
