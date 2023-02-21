@@ -25,13 +25,13 @@ exports.process = async (req, res, next) => {
         let recipeJson = await mainMiddleware.getRecipeJson(ingredients,cuisine, excludeCuisine, 
                                                         diet, intolerances, excludeIngredients, 
                                                         maxReadyTime, number);
-
+        
+        if(recipeJson['totalResults'] == 0) res.json({ message: "No recipe available for your filters"});
         let cleanRecipeJson = mainMiddleware.getCleanRecipeJson(recipeJson);
 
         res.setHeader('Content-Type', 'application/json');
         res.status = 200;
 
-        // res.json(recipeJson);
         res.json(cleanRecipeJson);
 
     } catch (err) {
