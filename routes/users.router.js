@@ -1,5 +1,5 @@
 /**
- * @router User
+ * @router Users
  */
 
 let User = require("../models/user");

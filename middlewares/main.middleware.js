@@ -1,3 +1,7 @@
+/**
+ * @middleware main
+ */
+
 const fetch = require("node-fetch");
 const { use } = require("passport");
 var utils = require('../utils/utils.js');
@@ -30,7 +34,12 @@ let mainMiddleware = {
             if(intolerances) url += "&intolerances=" + intolerances;
             if(excludeIngredients) url += "&excludeIngredients=" + excludeIngredients;
             if(maxReadyTime) url += "&maxReadyTime=" + maxReadyTime;
-            if(number) url += "&number=" + number;
+            
+            // setting default
+            if(!number){
+                number = 3;
+            }
+            url += "&number=" + number;
 
             let settings = { method: "Get" };
       
@@ -48,35 +57,40 @@ let mainMiddleware = {
         return false;
     },
 
-    getCleanRecipeJson: (recipeJson) => {
+    getCleanRecipesJson: (recipeJson) => {
         try {
-            let recipe = recipeJson['results'][0];
-            let id = recipe['id'];
-            let title = recipe['title'];
-            let readyInMinutes = recipe['readyInMinutes'];
-            let image = recipe['image'];
+            let recipe = recipeJson['results'];
+            let result = [];
+            for(var i = 0; i < recipe.length; i++) {
+
+                let id = recipe[i]['id'];
+                let title = recipe[i]['title'];
+                let readyInMinutes = recipe[i]['readyInMinutes'];
+                let image = recipe[i]['image'];
+                
+                let usedIngredients = utils.getIngredientsFromComplexArray(recipe[i]['usedIngredients']);
+                let unusedIngredients = utils.getIngredientsFromComplexArray(recipe[i]['unusedIngredients']);
+                let missingIngredients = utils.getIngredientsFromComplexArray(recipe[i]['missedIngredients']);
+    
+                let instructions = utils.getInstructions(recipe[i]['analyzedInstructions'][0]['steps']);
+    
+                let nutrition = utils.getNutrition(recipe[i]['nutrition']['nutrients']);
+    
+                let cleanRecipe = JSON.parse(JSON.stringify({
+                    "id" : id,
+                    "title" : title,
+                    "readyInMinutes" : readyInMinutes,
+                    "usedIngredients" : usedIngredients,
+                    "unusedIngredients" : unusedIngredients,
+                    "missingIngredients" : missingIngredients,
+                    "instructions" : instructions,
+                    "image" : image,
+                    "nutrition" : nutrition
+                }));
+                result.push(cleanRecipe);
+            }
             
-            let usedIngredients = utils.getIngredientsFromComplexArray(recipe['usedIngredients']);
-            let unusedIngredients = utils.getIngredientsFromComplexArray(recipe['unusedIngredients']);
-            let missingIngredients = utils.getIngredientsFromComplexArray(recipe['missedIngredients']);
-
-            let instructions = utils.getInstructions(recipe['analyzedInstructions'][0]['steps']);
-
-            let nutrition = utils.getNutrition(recipe['nutrition']['nutrients']);
-
-            let cleanRecipe = JSON.parse(JSON.stringify({
-                "id" : id,
-                "title" : title,
-                "readyInMinutes" : readyInMinutes,
-                "usedIngredients" : usedIngredients,
-                "unusedIngredients" : unusedIngredients,
-                "missingIngredients" : missingIngredients,
-                "instructions" : instructions,
-                "image" : image,
-                "nutrition" : nutrition
-            }));
-
-            return cleanRecipe;
+            return result;
         } catch (err) {
             console.error(err);
             next(err);

@@ -1,3 +1,7 @@
+/**
+ * @controller main
+ */
+
 var mainMiddleware = require('../middlewares/main.middleware');
 
 exports.mainView = (req, res, next) => {
@@ -7,9 +11,6 @@ exports.mainView = (req, res, next) => {
 // main process
 exports.process = async (req, res, next) => {
     try {
-        // (ingredients,cuisine, excludeCuisine, diet, intolerances, 
-            // excludeIngredients, instructionsRequired, maxReadyTime, number) 
-
         // parsing request
         let ingredients = req.body.ingredients;
         let cuisine = req.body.cuisine;
@@ -27,13 +28,12 @@ exports.process = async (req, res, next) => {
                                                         maxReadyTime, number);
         
         if(recipeJson['totalResults'] == 0) res.json({ message: "No recipe available for your filters"});
-        let cleanRecipeJson = mainMiddleware.getCleanRecipeJson(recipeJson);
+        let cleanRecipesJson = mainMiddleware.getCleanRecipesJson(recipeJson);
 
         res.setHeader('Content-Type', 'application/json');
         res.status = 200;
 
-        res.json(cleanRecipeJson);
-
+        res.json(cleanRecipesJson);
     } catch (err) {
         console.error(err);
         next(err);   
