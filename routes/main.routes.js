@@ -8,10 +8,12 @@ var auth = require("../controllers/authenticate.controller");
 var controller = require("../controllers/main.controller");
 
 // GET
-router.get("/",auth.isLogIn,controller.mainView);
+// router.get("/",auth.isLogIn,controller.mainView);
+router.get("/",controller.mainView);
 
 // POST
-router.post("/",auth.isLogIn,controller.process);
+// router.post("/",auth.isLogIn,controller.process);
+router.post("/",controller.process);
 
 
 

@@ -1,1 +1,24 @@
-extends layout
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title Register
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
+    style.
+      * {
+      width: 600px;
+      margin: 0 auto;
+      }
+  body
+    form(action='/home', method='POST')
+      .form-group
+        label(for='ingredients') Ingredients 
+        input.form-control(type='text', name='ingredients', placeholder='', required='')
+      button.btn.btn-primary(type='submit') Submit
+    //-   .form-group
+        //- label(for='email') Email 
+        //- input.form-control(type='text', name='email', placeholder='', required='')
+    //-   .form-group
+        //- label(for='password') Password
+        //- input.form-control(type='text', name='password', placeholder='' )
+    

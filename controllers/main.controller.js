@@ -20,7 +20,6 @@ exports.process = async (req, res, next) => {
         let excludeIngredients = req.body.excludeIngredients;
         let maxReadyTime = req.body.maxReadyTime;
         let number = req.body.number;
-        
 
         // getting recipes from spoonacular api
         let recipeJson = await mainMiddleware.getRecipeJson(ingredients,cuisine, excludeCuisine, 
@@ -29,7 +28,7 @@ exports.process = async (req, res, next) => {
         
         if(recipeJson['totalResults'] == 0) res.json({ message: "No recipe available for your filters"});
         let cleanRecipesJson = mainMiddleware.getCleanRecipesJson(recipeJson);
-
+        
         res.setHeader('Content-Type', 'application/json');
         res.status = 200;
 
