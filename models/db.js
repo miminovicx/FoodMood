@@ -25,7 +25,7 @@ mongoose.connection.on("connecting", function() {
 
 mongoose.connection.on("error", function(error) {
     spinner.stop();
-    console.error(chalk.bgKeywork("orange").black(" ERROR   ", chalk.bgKeywork("orange")("Error in MongoDB connection: " + error)));
+    console.error(chalk.bgKeyword("orange").black(" ERROR   ", chalk.bgKeyword("orange")("Error in MongoDB connection: " + error)));
 });
 
 mongoose.connection.on("connected", function() {
