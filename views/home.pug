@@ -13,7 +13,29 @@ html(lang='en')
     form(action='/home', method='POST')
       .form-group
         label(for='ingredients') Ingredients 
-        input.form-control(type='text', name='ingredients', placeholder='', required='')
+        input.form-control(type='text', name='ingredients', placeholder='', required)
+      .form-group
+        label(for='cuisine') cuisine 
+        input.form-control(type='text', name='cuisine', placeholder='')
+      .form-group
+        label(for='excludeCuisine') Exclude cuisine 
+        input.form-control(type='text', name='excludeCuisine', placeholder='cuisine you do not want')
+      .form-group
+        label(for='diet') Diet 
+        input.form-control(type='text', name='diet', placeholder='')
+      .form-group
+        label(for='intolerances') intolerances 
+        input.form-control(type='text', name='intolerances', placeholder='')
+      .form-group
+        label(for='excludeIngredients') Exclude ingredients 
+        input.form-control(type='text', name='excludeIngredients', placeholder='ingredients you do not want')
+      .form-group
+        label(for='maxReadyTime') Maximum ready time 
+        input.form-control(type='int', name='maxReadyTime', placeholder='')
+      .form-group
+        label(for='number') Number of recipes
+        input.form-control(type='int', name='number', placeholder='')
+        
       button.btn.btn-primary(type='submit') Submit
     //-   .form-group
         //- label(for='email') Email 
