@@ -9,7 +9,7 @@ config.https = {
 
 // cors options
 config.corsOptions = {
-    origin: 'http://localhost:3000/',
+    origin: 'https://localhost:3000/',
     methods: "POST,GET",
     optionsSuccessStatus: 200
 }

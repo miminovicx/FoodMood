@@ -7,10 +7,33 @@ table
   thead
     tr
       th Image
-      th Product name
-      th Price
-      th inventory
-      th Product code
-  tbody#data-output
-    // Prodcuts from javascript file in here.
-// <script src=""></script>
+      th Title
+      th Ingredients used
+      th Ingredients missing
+      th Instructions
+      th Nutrients
+
+    tbody
+      each recipe in recipes
+        tr
+          td
+            img(src='#{recipe.image}')
+          td #{recipe.title}
+          td
+            ul
+              each ing in recipe.usedIngredients  
+                li #{ing['name']} : #{ing['quantity']}
+          td
+            ul
+              each ing in recipe.missingIngredients
+                li #{ing['name']} : #{ing['quantity']}
+          td
+            ul
+              each inst in recipe.instructions  
+                li #{inst['step']}- #{inst['instruction']}
+          td
+            ul
+              each nutr in recipe.nutrition  
+                li #{nutr['name']} : #{nutr['amount']}
+a(href='/home') Back
+

@@ -3,6 +3,7 @@
  */
 
 var mainMiddleware = require('../middlewares/main.middleware');
+var path = require('path');
 
 exports.mainView = (req, res, next) => {
     res.render("./home", { title: "OK" });
@@ -29,10 +30,11 @@ exports.process = async (req, res, next) => {
         if(recipeJson['totalResults'] == 0) res.json({ message: "No recipe available for your filters"});
         let cleanRecipesJson = mainMiddleware.getCleanRecipesJson(recipeJson);
         
-        res.setHeader('Content-Type', 'application/json');
-        res.status = 200;
+        // res.setHeader('Content-Type', 'application/json');
+        // res.status = 200;
 
-        res.json(cleanRecipesJson);
+        // res.json(cleanRecipesJson);
+        res.render('result',{recipes : cleanRecipesJson});
     } catch (err) {
         console.error(err);
         next(err);   
