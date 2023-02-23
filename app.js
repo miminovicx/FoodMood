@@ -32,6 +32,10 @@ app.use(cors(config.corsOptions));
 // enabling helmet
 app.use(helmet(config.helmetOptions));
 
+// Apply the rate limiting middleware to all requests
+app.use(config.limiter)
+
+
 //passport initialization
 app.use(session({
   secret: "our-passport-local-strategy-app",

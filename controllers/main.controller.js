@@ -6,7 +6,7 @@ var mainMiddleware = require('../middlewares/main.middleware');
 var path = require('path');
 
 exports.mainView = (req, res, next) => {
-    res.render("./home", { title: "OK" });
+    res.render("./home");
 };
 
 // main process
