@@ -13,6 +13,10 @@ html(lang='en')
         text-align: center;
         margin-top: 50px;
       }
+      .center {
+        display: flex;
+        justify-content: center;
+      }
   body
     h1 FoodMood
     form(action='/home', method='POST')
@@ -40,4 +44,5 @@ html(lang='en')
       .form-group
         label(for='number') Number of Recipes
         input.form-control(type='number', name='number', placeholder='E.g. 10')
-      button.btn.btn-primary(type='submit') Search
+      .form-group.center
+        button.btn.btn-primary(type='submit') Search
