@@ -47,14 +47,16 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./routes/index.router');
 var authRouter = require('./routes/authenticate.router');
 var usersRouter = require('./routes/users.router');
+var paymentRouter = require('./routes/payment.router');
 var mainRouter = require('./routes/main.routes');
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
+app.use('/pay', paymentRouter);
 app.use('/home', mainRouter);
 
 // catch 404 and forward to error handler
