@@ -56,7 +56,7 @@ var mainRouter = require('./routes/main.routes');
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
-app.use('/pay', paymentRouter);
+app.use('/payment', paymentRouter);
 app.use('/home', mainRouter);
 
 // catch 404 and forward to error handler
