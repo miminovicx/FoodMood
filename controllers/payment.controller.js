@@ -6,8 +6,7 @@ const config = require('../config');
 const stripe = require("stripe")(config.stripeKeys["STRIPE_SECRET_KEY"]);
 
 exports.paymentView = (req, res, next) => {
-    res.render("./payment copy");
-    // res.json({ "message" : "page OK"});
+    res.render("./payment",{user: req.user});
 };
 
 exports.pay = async (req, res, next) => {

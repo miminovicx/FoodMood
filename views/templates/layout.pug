@@ -1,94 +1,69 @@
 // - Header Layout
 
-html
+html(lang='en')
   head
-    title Markets
-    
+    meta(charset='UTF-8')
     block css
-        link(rel='stylesheet', href='/stylesheets/style.min.css', type="text/css")
-        link(rel='stylesheet', href='/stylesheets/weather.css', type="text/css")
-        |  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
-    
-    |  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-    | <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  
-  body
+      link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
+      link(rel='stylesheet', href='/stylesheets/navbar.css', type="text/css")
+    style.
+      form {
+        width: 600px;
+        margin: 0 auto;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+      header {
+        background-color: white;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 0 25px 0 black;
+      }
 
+      header * {
+          display: inline;
+      }
+
+      header li {
+          margin: 20px;
+      }
+
+      header li a {
+          color: black;
+          text-decoration: none;
+      }
+      .center {
+        display: flex;
+        justify-content: center;
+      }
+
+  body
     block header
        nav.uk-background-secondary.uk-light(uk-navbar)
-        .uk-navbar-left
-
-            a.uk-navbar-item.uk-logo(href="/markets")
-                img(src="./images/market.png", style="height:32px")
-                | 
-            ul.uk-navbar-nav
-                li.uk-active
-                    a(href='/markets') Marchés
-                li
-                    a(href='/merchants') Commerçants
-                        .uk-navbar-dropdown
-                            ul.uk-nav.uk-navbar-dropdown-nav
-                                li.uk-active
-                                    a(href='/merchants/type/Legumes') 
-                                        img(src="./images/organic-food.png", style="height: 16px")
-                                        |  Légumes
-                                li
-                                    a(href='/merchants/type/Poissons')
-                                        img(src="./images/clown-fish.png", style="height: 16px")
-                                        |  Poissons
-                                li
-                                    a(href='/merchants/type/Viandes')
-                                        img(src="./images/beef.png", style="height: 16px")
-                                        |  Viandes
-                li
-                    a(href='/markets/map') Carte
         .uk-navbar-right
-            ul.uk-navbar-nav
-                if !user
-                    li.uk-active
-                        a(href='/auth/login') Connexion
-                    li
-                        a(href='/auth/register') Inscription
-                if user
-                    li
-                        a(href='/') Mon compte
-                        .uk-navbar-dropdown
-                            ul.uk-nav.uk-navbar-dropdown-nav
-                                li
-                                    a(href='/users') Mes informations
-                                li
-                                    a(href='/auth/logout') Déconnexion
-
-
-
-
+          ul.uk-navbar-nav
+            li.uk-active
+              a(href='/home')
+                img(src='../images/foodmoodicon.png' style="height: 40px")
+          ul.uk-navbar-nav
+            if !user
+                li.uk-active
+                    a(href='/auth/login') Sign in
+                li
+                    a(href='/auth/register') Register
+            if user
+                li
+                    a(href='/users') My account
+                li
+                    a(href='/payment') Buy coins 
+                li
+                    a(href='/auth/logout') Log out
+                    
     block content
-
-  footer.uk-margin-large-top
-    div.uk-section.uk-section-primary
-        div.uk-container
-
-            div.uk-grid-match.uk-child-width-1-3(uk-grid="")
-                div
-                    h3.uk-heading-bullet.uk-margin-remove Marchés
-                    ul.uk-list.uk-list-hyphen.uk-margin-remove
-                        li
-                            a(href="/markets") Liste des marchés
-                        li
-                            a(href="/markets/add") Créer un marché
-                div
-                    h3.uk-heading-bullet Commerçants
-                    ul.uk-list.uk-list-hyphen.uk-margin-remove
-                        li 
-                            a(href="/merchants") Liste des commerçants
-                        li 
-                            a(href="/merchants/add") Créer un commerçant
-                div
-                    h3.uk-heading-bullet Utilisateurs
-                    ul.uk-list.uk-list-hyphen.uk-margin-remove
-                        li
-                            a(href="/users") Mon compte
-
-  block scripts
-    script(src='/javascripts/uikit.min.js')
-    script(src='/javascripts/uikit-icon.min.js')

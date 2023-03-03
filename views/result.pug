@@ -1,39 +1,44 @@
-//- extends layout
-doctype html
-head
+extends ./templates/layout
+//- doctype html
+//- head
     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
+block content
+  table
+    thead
+      tr
+        th Title
+        th Used ingredients
+        th Missing ingredients
+        th Instructions
+        th Nutrients
+        th Image
 
-table
-  thead
-    tr
-      th Image
-      th Title
-      th Ingredients used
-      th Ingredients missing
-      th Instructions
-      th Nutrients
-
-    tbody
-      each recipe in recipes
-        tr
-          td
-            img(src='#{recipe.image}')
-          td #{recipe.title}
-          td
-            ul
-              each ing in recipe.usedIngredients  
-                li #{ing['name']} : #{ing['quantity']}
-          td
-            ul
-              each ing in recipe.missingIngredients
-                li #{ing['name']} : #{ing['quantity']}
-          td
-            ul
-              each inst in recipe.instructions  
-                li #{inst['step']}- #{inst['instruction']}
-          td
-            ul
-              each nutr in recipe.nutrition  
-                li #{nutr['name']} : #{nutr['amount']}
-a(href='/result') Back
+      tbody
+        each recipe in recipes
+          tr
+            //- td
+              //- img(src='./images/market.png' alt=recipe.image)
+              //- img(src=recipe.image style="height:120px")
+              //- canvas(width='100')
+            td #{recipe.title}
+            td
+              ul
+                each ing in recipe.usedIngredients  
+                  li #{ing['name']} : #{ing['quantity']}
+            td
+              ul
+                each ing in recipe.missingIngredients
+                  li #{ing['name']} : #{ing['quantity']}
+            td
+              ul
+                each inst in recipe.instructions  
+                  li #{inst['step']}- #{inst['instruction']}
+            td
+              ul
+                li #{recipe.nutrition[0]['name']} : #{recipe.nutrition[0]['amount']}
+                li #{recipe.nutrition[1]['name']} : #{recipe.nutrition[1]['amount']}
+                li #{recipe.nutrition[2]['name']} : #{recipe.nutrition[2]['amount']}
+            td
+              a(href=recipe.image) See image
+  a(href='/home') Back
 

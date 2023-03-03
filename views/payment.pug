@@ -1,24 +1,7 @@
-doctype html
-html(lang='en')
-  head
-    meta(charset='UTF-8')
-    title Find recipe
-    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
-    style.
-      form {
-        width: 600px;
-        margin: 0 auto;
-      }
-      h1 {
-        text-align: center;
-        margin-top: 50px;
-      }
-      .center {
-        display: flex;
-        justify-content: center;
-      }
+extends ./templates/layout
+
+block content
   body
-    a.btn.btn-link(href='/home') Home
     h1 Credit Card Payment
     form(action='/payment', method='POST')
       .form-group
@@ -35,3 +18,23 @@ html(lang='en')
         input.form-control(type='number', name='cvv', placeholder='')
       .form-group.center
         button.btn.btn-primary(type='submit') Pay
+
+//- doctype html
+//- html(lang='en')
+//-   head
+//-     meta(charset='UTF-8')
+//-     title Find recipe
+//-     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
+//-     style.
+//-       form {
+//-         width: 600px;
+//-         margin: 0 auto;
+//-       }
+//-       h1 {
+//-         text-align: center;
+//-         margin-top: 50px;
+//-       }
+//-       .center {
+//-         display: flex;
+//-         justify-content: center;
+//-       }
