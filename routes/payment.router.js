@@ -11,8 +11,6 @@ var controller = require("../controllers/payment.controller");
 router.get("/",controller.paymentView);
 
 // POST
-// router.post("/",auth.isLogIn,controller.pay);
-router.post("/",controller.pay);
-
+router.post("/",auth.isLogIn,controller.pay);
 
 module.exports = router;

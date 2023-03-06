@@ -75,6 +75,9 @@ exports.logout =(req, res, next) => {
 };
 
 exports.isLogIn = (req,res,next) => {
-    if (!req.isAuthenticated()) return res.status(401).send({ message: "Unauthorized!" });
+    if (!req.isAuthenticated()) {
+        // return res.status(401).send({ message: "Unauthorized!" });
+        res.redirect('/auth/login');       
+    }
     next();
 };
