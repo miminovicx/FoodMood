@@ -6,7 +6,7 @@ var mainMiddleware = require('../middlewares/main.middleware');
 var path = require('path');
 
 exports.mainView = (req, res, next) => {
-    res.render("./home");
+    res.render("./home",{ user: req.user });
 };
 
 // main process
@@ -34,7 +34,9 @@ exports.process = async (req, res, next) => {
         // res.status = 200;
 
         // res.json(cleanRecipesJson);
-        res.render('result',{recipes : cleanRecipesJson});
+        res.render('result',{
+                                recipes : cleanRecipesJson,
+                                user: req.user });
     } catch (err) {
         console.error(err);
         next(err);   
