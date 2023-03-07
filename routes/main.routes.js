@@ -6,13 +6,14 @@ var express = require("express");
 var router = express.Router();
 var auth = require("../controllers/authenticate.controller");
 var controller = require("../controllers/main.controller");
+var userController = require("../controllers/users.controller");
 
 // GET
 router.get("/",controller.mainView);
 // router.get("/",controller.mainView);
 
 // POST
-router.post("/",auth.isLogIn,controller.process);
+router.post("/",[auth.isLogIn,userController.hasCoins],controller.process);
 // router.post("/",controller.process);
 
 
