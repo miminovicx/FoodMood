@@ -42,6 +42,25 @@ var controller = {
             res.json({ status: 401, message: "Vous n'avez pas la permission." });
         }
     },
+
+    hasCoins: async(req, res, next) => {
+        let user = await User.findById(req.user._id);
+        if(user.coins <= 0){   
+            res.redirect("/payment");
+        }
+        next();
+    },
+
+    reduceCoins: async(user,numberCoins) => {
+    
+        let temp = await User.findById(user._id);
+        let actualCoins = temp.coins;
+        let userDb = await User.findByIdAndUpdate(user._id,{
+                coins : actualCoins - numberCoins,
+        });
+        return userDb;
+    }
+
 };
 
 module.exports = controller;

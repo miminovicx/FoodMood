@@ -3,7 +3,9 @@
  */
 
 var mainMiddleware = require('../middlewares/main.middleware');
-var path = require('path');
+// var path = require('path');
+const userController = require("./users.controller")
+
 
 exports.mainView = (req, res, next) => {
     res.render("./home",{ user: req.user });
@@ -34,6 +36,7 @@ exports.process = async (req, res, next) => {
         // res.status = 200;
 
         // res.json(cleanRecipesJson);
+        userController.reduceCoins(req.user,1);
         res.render('result',{
                                 recipes : cleanRecipesJson,
                                 user: req.user });

@@ -4,6 +4,7 @@
 
 const config = require('../config');
 const stripe = require("stripe")(config.stripeKeys["STRIPE_SECRET_KEY"]);
+const Users = require("../models/user")
 
 exports.paymentView = (req, res, next) => {
     res.render("./payment",{user: req.user});
@@ -24,7 +25,10 @@ exports.pay = async (req, res, next) => {
         if (charge && charge.status == 'succeeded') { 
             res.setHeader('Content-Type', 'application/json');
             res.status = 200;
-            res.json({"success" : "payment complete"}); 
+            // let a = 
+            res.json({"user": addCoins(req.user,10)});
+            // addCoins(req.user,10);
+            // res.redirect("/home");
         } else {
             res.setHeader('Content-Type', 'application/json');
             res.status = 400;
@@ -74,4 +78,14 @@ const createCharge = async (tokenId, amount) => {
         charge.error = error.message;
     }
     return charge;
+}
+
+const addCoins = async(user, numberCoins) => {
+    
+    let temp = await Users.findById(user._id);
+    let actualCoins = temp.coins;
+    let userDb = await Users.findByIdAndUpdate(user._id,{
+            coins : actualCoins + numberCoins,
+    });
+    return userDb;
 }
