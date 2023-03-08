@@ -1,8 +1,47 @@
 extends ./templates/layout
 //- doctype html
-//- head
-    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
 block content
+  head
+    style.
+      body {
+
+          height: 100vh;
+          font-family: Arial, sans-serif;
+          background-color: #f7f7f7;
+          background-image: url('../images/foodBack_Small.png');
+      }
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      table, th, td {
+        border: 1px solid;
+        border-color: #FFA500;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+      }
+      th, td {
+         padding: 12px 15px;
+      }
+      td, tr{
+        justify-content: center;
+        align-items: center;
+      }
+      table {
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 0.9em;
+        font-family: sans-serif;
+        min-width: 400px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+      }
+      tr {
+        background-color: #ffede0;
+        color: black;
+        text-align: left;
+      }
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
   table
     thead
       tr
@@ -11,20 +50,22 @@ block content
         th Missing ingredients
         th Instructions
         th Nutrients
-        th Image
 
       tbody
         each recipe in recipes
           tr
-            td #{recipe.title}
+            td
+              ul 
+                li #{recipe.title}
+                a(href=recipe.image) See image
             td
               ul
                 each ing in recipe.usedIngredients  
-                  li #{ing['name']} : #{ing['quantity']}
+                  li #{ing['name']} 
             td
               ul
                 each ing in recipe.missingIngredients
-                  li #{ing['name']} : #{ing['quantity']}
+                  li #{ing['name']} 
             td
               ul
                 each inst in recipe.instructions  
@@ -34,7 +75,5 @@ block content
                 li #{recipe.nutrition[0]['name']} : #{recipe.nutrition[0]['amount']}
                 li #{recipe.nutrition[1]['name']} : #{recipe.nutrition[1]['amount']}
                 li #{recipe.nutrition[2]['name']} : #{recipe.nutrition[2]['amount']}
-            td
-              a(href=recipe.image) See image
 
 

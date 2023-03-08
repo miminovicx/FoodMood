@@ -10,11 +10,9 @@ var userController = require("../controllers/users.controller");
 
 // GET
 router.get("/",controller.mainView);
-// router.get("/",controller.mainView);
 
 // POST
 router.post("/",[auth.isLogIn,userController.hasCoins],controller.process);
-// router.post("/",controller.process);
 
 
 
