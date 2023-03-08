@@ -1,6 +1,13 @@
 var config = {}
 const rateLimit = require('express-rate-limit');
 
+
+// database urls for prod and dev envs
+config.mongoUrl = {
+    local: "mongodb://localhost:27017/foodmood",
+    prod: "...",
+};
+
 config.secretKey =  "hello";
 
 config.https = {
@@ -31,12 +38,6 @@ config.limiter = rateLimit({
 	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
 	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 })
-
-// database urls for prod and dev envs
-config.mongoUrl = {
-    local: "mongodb://localhost:27017/foodmood",
-    prod: "...",
-};
 
 // rate limiting (limit of the queries done in a certain time)
 config.rateLimit = {
