@@ -237,7 +237,8 @@ ul.uk-nav-sub {
 }
 
 .uk-navbar-nav>li>a {
-    color: #999;
+    color: white;
+    /* color: #999; */
     text-transform: uppercase;
     transition: .1s ease-in-out;
     transition-property: color, background-color
@@ -380,11 +381,11 @@ ul.uk-nav-sub {
 }
 
 .uk-background-primary {
-    background-color: #0069d9
+    background-color: #FF0000
 }
 
 .uk-background-secondary {
-    background-color: #0069d9
+    background-color: #FF0000
 }
 
 .uk-background-contain,

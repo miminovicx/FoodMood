@@ -1,9 +1,80 @@
 extends ./templates/layout
 
 block content
+  head
+    title
+      | FoodMood
+    style.
+      body {
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        background-image: url('../images/foodBack_Small.png');
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        background-color: #ffede0;
+        border-radius: 5px;
+        box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+        margin-top: 50px;
+        margin-bottom: 50px;
+      }
+      h1 {
+        margin-bottom: 25px;
+        color: #FF0000; // rouge
+      }
+      h4 {
+        margin-bottom: 25px;
+        color: #FF0000; // rouge
+      }
+      label {
+        font-weight: bold;
+        color: #333333;
+      }
+      input {
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #f7f7f7;
+        box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+        color: #333333;
+        font-size: 16px;
+      }
+      button {
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: #FFA500;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      button:hover {
+        background-color: #FF8C00;
+      }
+      .links {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .links a {
+        color: #FF0000; // rouge
+        text-decoration: none;
+        margin-left: 10px;
+      }
+      .links a:hover {
+        text-decoration: underline;
+      }
   body
-    h1 Credit Card Payment
     form(action='/payment', method='POST')
+      h1 Credit Card Payment
+      h4 9.99 € = 10 coins
       .form-group
         label(for='cardNumber') Card number
         input.form-control(type='text', name='cardNumber', placeholder='4242 4000 4000 4000')
@@ -17,7 +88,7 @@ block content
         label(for='cvv') CVV
         input.form-control(type='number', name='cvv', placeholder='')
       .form-group.center
-        button.btn.btn-primary(type='submit') Pay
+        button(type='submit') Buy
 
 //- doctype html
 //- html(lang='en')

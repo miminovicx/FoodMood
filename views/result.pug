@@ -16,10 +16,6 @@ block content
       tbody
         each recipe in recipes
           tr
-            //- td
-              //- img(src='./images/market.png' alt=recipe.image)
-              //- img(src=recipe.image style="height:120px")
-              //- canvas(width='100')
             td #{recipe.title}
             td
               ul
@@ -40,5 +36,5 @@ block content
                 li #{recipe.nutrition[2]['name']} : #{recipe.nutrition[2]['amount']}
             td
               a(href=recipe.image) See image
-  a(href='/home') Back
+
 

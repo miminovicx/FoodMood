@@ -20,7 +20,7 @@ exports.pay = async (req, res, next) => {
             res.json({"err" : "erreur"})
         }
     
-        var amount = 10 * 100; // 10e
+        var amount = 9.99 * 100; // 9.99e
         const charge = await createCharge(token.id, amount);
         if (charge && charge.status == 'succeeded') { 
             res.setHeader('Content-Type', 'application/json');

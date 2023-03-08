@@ -1,9 +1,76 @@
 extends ./templates/layout
 
+
 block content
+  head
+    title
+      | FoodMood
+    style.
+      body {
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        background-image: url('../images/foodBack_Small.png');
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        background-color: #ffede0;
+        border-radius: 5px;
+        box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+        margin-top: 50px;
+        margin-bottom: 50px;
+      }
+      h1 {
+        margin-bottom: 50px;
+        color: #FF0000; // rouge
+      }
+      label {
+        font-weight: bold;
+        color: #333333;
+      }
+      input {
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #f7f7f7;
+        box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+        color: #333333;
+        font-size: 16px;
+      }
+      button {
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: #FFA500;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      button:hover {
+        background-color: #FF8C00;
+      }
+      .links {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .links a {
+        color: #FF0000; // rouge
+        text-decoration: none;
+        margin-left: 10px;
+      }
+      .links a:hover {
+        text-decoration: underline;
+      }
   body
-    h1 FoodMood
     form(action='/home', method='POST')
+      h1 Wanna cook ?
       .form-group
         label(for='ingredients') Ingredients 
         input.form-control(type='text', name='ingredients', placeholder='E.g. chicken, broccoli', required='')
@@ -29,24 +96,4 @@ block content
         label(for='number') Number of Recipes
         input.form-control(type='number', name='number', placeholder='E.g. 10')
       .form-group.center
-        button.btn.btn-primary(type='submit') Search
-    //- a.btn.btn-link(href='/payment') Buy credits ?
-//- doctype html
-//- html(lang='en')
-//-   head
-//-     meta(charset='UTF-8')
-//-     //- title Find recipe
-//-     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
-//-     style.
-//-       form {
-//-         width: 600px;
-//-         margin: 0 auto;
-//-       }
-//-       h1 {
-//-         text-align: center;
-//-         margin-top: 50px;
-//-       }
-//-       .center {
-//-         display: flex;
-//-         justify-content: center;
-//-       }
+        button(type='submit') Search 
