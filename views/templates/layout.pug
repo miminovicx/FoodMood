@@ -61,7 +61,7 @@ html(lang='en')
                     a(href='/auth/register') Register
             if user
                 li
-                    a(href='/users') My account
+                    a(href='/home') #{user.username}
                 li
                     a(href='/payment') #{user.coins} coins ! Buy more ? 
                 li
