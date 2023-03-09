@@ -1,17 +1,43 @@
-### Node Express template project
+# FoodMood
 
-This project is based on a GitLab [Project Template](https://docs.gitlab.com/ee/gitlab-basics/create-project.html).
+### Table of contents
+- [About](#about)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Launch](#launch)
+- [API](#api)
+- [Dockerfile](#dockerfile-installation)
+- [Licence](#licence)
 
-Improvements can be proposed in the [original project](https://gitlab.com/gitlab-org/project-templates/express).
+### About
+Multiple recipes are available. User looks for one, with specific ingredients or with more filters available.
 
-### CI/CD with Auto DevOps
+### Requirements
+- NodeJS.
+- MongoDB.
 
-This template is compatible with [Auto DevOps](https://docs.gitlab.com/ee/topics/autodevops/).
+### Installation
+At the project root, launch the commandline :
+```npm i``` to install all the packages needed.
 
-If Auto DevOps is not already enabled for this project, you can [turn it on](https://docs.gitlab.com/ee/topics/autodevops/#enabling-auto-devops) in the project settings.
+In the ```config.js``` file and put the corresponding URL to your Mongo base.
 
-### Developing with Gitpod
+NB : make sure that mongod is launched well.
 
-This template has a fully-automated dev setup for [Gitpod](https://docs.gitlab.com/ee/integration/gitpod.html).
+### Launch
+At the project root, launch the commandline :
+```npm run```
 
-If you open this project in Gitpod, you'll get all Node dependencies pre-installed and Express will open a web preview.
+Then on your browser, go on ```https://localhost:3000```
+
+### API :
+* Spoonacular API : https://spoonacular.com/food-api
+* Stripe : https://stripe.com/docs/api
+  
+
+### Dockerfile installation
+Launch the command line : 
+``` sudo docker build . ```
+
+### Licence
+This project is licensed under the [MIT licence](./LICENCE).

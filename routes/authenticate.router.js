@@ -7,9 +7,6 @@ var express = require("express");
 var router = express.Router();
 var controller = require("../controllers/authenticate.controller");
 const passport = require("passport");
-var authenticate = require("../middlewares/authenticate.middleware");
-
-
 
 // Parse Json
 const bodyParser = require('body-parser');
@@ -35,6 +32,9 @@ router.get('/', [controller.isLogIn],(req, res, next) =>{
 //Register
 router.get("/register", controller.registerView);
 
+//Login
+router.get("/login", controller.loginView);
+
 //Logout
 router.get("/logout", controller.logout);
 
@@ -47,11 +47,15 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
     var token = authenticate.getToken({_id: req.user._id});
     
     // Response
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json({success: true, token: token, status: 'You are successfully logged in!'});
+    if(process.env.NODE_ENV == "local"){
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({success: true, token: token, status: 'You are successfully logged in!'});
+    }
+    else{
+        res.redirect('/home/');
+    }
    });
-     
 
 // Inscription
 router.post("/register", controller.addUser);

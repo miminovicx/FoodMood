@@ -5,26 +5,33 @@
   "scripts": {
     "start": "NODE_ENV=prod node ./bin/www",
     "start:local": "NODE_ENV=local nodemon ./bin/www",
+    "start:prod": "NODE_ENV=prod nodemon ./bin/www",
     "test": "mocha"
   },
   "dependencies": {
+    "bootstrap": "^5.2.3",
     "chalk": "^4.1.2",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+    "express-rate-limit": "^6.7.0",
     "express-session": "^1.17.3",
+    "fs": "^0.0.1-security",
     "helmet": "^6.0.1",
     "http-errors": "~1.6.2",
+    "https": "^1.0.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.1",
     "morgan": "~1.9.0",
+    "node-fetch": "^2.6.1",
     "ora": "^5.4.1",
     "passport": "^0.5.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^7.1.2",
-    "pug": "2.0.0-beta11"
+    "pug": "2.0.0-beta11",
+    "stripe": "^11.12.0"
   },
   "devDependencies": {
     "mocha": "^5.1.1",

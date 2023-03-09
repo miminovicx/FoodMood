@@ -9,8 +9,6 @@ var logger = require('morgan');
 var passport = require('passport');
 var session = require('express-session');
 var config = require('./config');
-const https = require('https');
-const fs = require('fs');
 const cors = require('cors');
 const helmet = require('helmet');
 
@@ -32,6 +30,10 @@ app.use(cors(config.corsOptions));
 // enabling helmet
 app.use(helmet(config.helmetOptions));
 
+// Apply the rate limiting middleware to all requests
+app.use(config.limiter)
+
+
 //passport initialization
 app.use(session({
   secret: "our-passport-local-strategy-app",
@@ -43,25 +45,17 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./routes/index.router');
 var authRouter = require('./routes/authenticate.router');
 var usersRouter = require('./routes/users.router');
+var paymentRouter = require('./routes/payment.router');
 var mainRouter = require('./routes/main.routes');
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
+app.use('/payment', paymentRouter);
 app.use('/home', mainRouter);
-
-const options={
-    key : fs.readFileSync(path.join(__dirname,'./cert/key.pem')),
-    cert : fs.readFileSync(path.join(__dirname,'./cert/cert.pem'))
-}
-
-const sslServer = https.createServer(options,app);
-// sslServer.listen(3000 ,() => {
-//   console.log('Secure server is listening on port 3000');
-// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

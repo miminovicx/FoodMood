@@ -11,6 +11,7 @@ var user = new Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     admin: { type: Boolean, default: false },
+    coins: { type: Number, integer: true, default: 10}
   },
   { collection: "users", timestamps: true });
 

@@ -1,15 +1,20 @@
-FROM node:8.11-alpine
+# Specify a base image
+FROM node:14
 
-WORKDIR /usr/src/app
+# Set the working directory in the container
+WORKDIR /
 
-ARG NODE_ENV
-ENV NODE_ENV $NODE_ENV
+# Copy package.json and package-lock.json to the container
+COPY package*.json ./
 
-COPY package*.json /usr/src/app/
+# Install dependencies
 RUN npm install
 
-COPY . /usr/src/app
+# Copy the rest of the application code to the container
+COPY . .
 
-ENV PORT 5000
-EXPOSE $PORT
-CMD [ "npm", "start" ]
+# Expose the port that the app will listen on
+EXPOSE 3000
+
+# Start the app
+CMD ["npm", "start"]

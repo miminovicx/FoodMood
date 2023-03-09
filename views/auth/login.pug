@@ -1,0 +1,88 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title FoodMood - Login
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
+    link(rel="icon", type="image/x-icon", href="../images/foodmoodicon.png")
+    style.
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        background-image: url('../images/foodBack_Small.png');
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+        background-color: #ffede0;
+        border-radius: 5px;
+        box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+        width: 100%;
+        max-width: 600px;
+      }
+      h1 {
+        margin-bottom: 20px;
+        color: #FF0000; /* Red */
+      }
+      label {
+        font-weight: bold;
+        color: #333333;
+      }
+      input.form-control {
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #f7f7f7;
+        box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+        color: #333333;
+        font-size: 16px;
+      }
+      button.btn.btn-primary {
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: #FFA500; /* Orange */
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      button.btn.btn-primary:hover {
+        background-color: #FF8C00; /* Darker orange */
+      }
+      a.btn.btn-link {
+        margin-top: 20px;
+        color: #FF0000; /* Red */
+        text-decoration: none;
+        font-size: 16px;
+      }
+      a.btn.btn-link:hover {
+        text-decoration: underline;
+      }
+  body
+    form(action='/auth/login', method='POST')
+      h1(style={color: "red"}) FoodMood
+      .form-group
+        label(for='username') Username 
+        input.form-control(type='text', name='username', placeholder='Example', required='')
+      .form-group
+        label(for='password') Password
+        input.form-control(type='password', name='password', placeholder='Password', required)
+      button.btn.btn-primary(type='submit') Log in
+      .links
+        span <br><br>Don't have an account ?
+      a.btn.btn-link(href='/auth/register') Register now.
