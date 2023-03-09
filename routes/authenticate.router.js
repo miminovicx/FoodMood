@@ -44,15 +44,18 @@ router.get("/logout", controller.logout);
 router.post('/login', passport.authenticate('local'), (req, res) => {
  
     // Create a token
-    // var token = authenticate.getToken({_id: req.user._id});
+    var token = authenticate.getToken({_id: req.user._id});
     
-    // // Response
-    // res.statusCode = 200;
-    // res.setHeader('Content-Type', 'application/json');
-    // res.json({success: true, token: token, status: 'You are successfully logged in!'});
-    res.redirect('/home/');
+    // Response
+    if(process.env.NODE_ENV == "local"){
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({success: true, token: token, status: 'You are successfully logged in!'});
+    }
+    else{
+        res.redirect('/home/');
+    }
    });
-     
 
 // Inscription
 router.post("/register", controller.addUser);

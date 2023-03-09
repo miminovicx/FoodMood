@@ -5,7 +5,7 @@ const rateLimit = require('express-rate-limit');
 // database urls for prod and dev envs
 config.mongoUrl = {
     local: "mongodb://localhost:27017/foodmood",
-    prod: "...",
+    prod: "mongodb://localhost:27017/foodmood",
 };
 
 config.secretKey =  "hello";

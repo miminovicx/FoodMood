@@ -14,6 +14,4 @@ router.get("/",controller.mainView);
 // POST
 router.post("/",[auth.isLogIn,userController.hasCoins],controller.process);
 
-
-
 module.exports = router;

@@ -20,15 +20,16 @@ exports.pay = async (req, res, next) => {
             res.json({"err" : "erreur"})
         }
     
-        var amount = 9.99 * 100; // 9.99e
+        var amount = 5.99 * 100; // 5.99e
         const charge = await createCharge(token.id, amount);
         if (charge && charge.status == 'succeeded') { 
-            res.setHeader('Content-Type', 'application/json');
-            res.status = 200;
-            // let a = 
-            // res.json({"user": addCoins(req.user,10)});
             addCoins(req.user,10);
-            // addCoins(req.user,10);
+            if(process.env.NODE_ENV == "local"){    
+                res.setHeader('Content-Type', 'application/json');
+                res.status = 200;
+                res.json({"message": "Success"});
+            }
+            
             res.redirect("/home");
         } else {
             res.setHeader('Content-Type', 'application/json');

@@ -9,8 +9,6 @@ var logger = require('morgan');
 var passport = require('passport');
 var session = require('express-session');
 var config = require('./config');
-const https = require('https');
-const fs = require('fs');
 const cors = require('cors');
 const helmet = require('helmet');
 

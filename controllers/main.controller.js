@@ -31,15 +31,17 @@ exports.process = async (req, res, next) => {
         
         if(recipeJson['totalResults'] == 0) res.json({ message: "No recipe available for your filters"});
         let cleanRecipesJson = mainMiddleware.getCleanRecipesJson(recipeJson);
-        
-        // res.setHeader('Content-Type', 'application/json');
-        // res.status = 200;
-
-        // res.json(cleanRecipesJson);
         userController.reduceCoins(req.user,1);
-        res.render('result',{
-                                recipes : cleanRecipesJson,
-                                user: req.user });
+        
+        if(process.env.NODE_ENV == "local"){
+            res.setHeader('Content-Type', 'application/json');
+            res.status = 200;
+            res.json(cleanRecipesJson);
+        }
+        else{
+            res.render('result',{   recipes : cleanRecipesJson,
+                                    user: req.user });
+        }
     } catch (err) {
         console.error(err);
         next(err);   

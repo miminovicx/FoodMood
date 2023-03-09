@@ -42,9 +42,11 @@ exports.addUser =(req, res, next) => {
                     res.json({err: err});
                 } else {
                     passport.authenticate("local")(req, res, () => {
-                        // res.statusCode = 200;
-                        // res.setHeader('Content-Type', 'application/json');
-                        // res.json({success: true, status: 'Registration Successful!'});
+                        if(process.env.NODE_ENV == "local"){
+                            res.statusCode = 200;
+                            res.setHeader('Content-Type', 'application/json');
+                            res.json({success: true, status: 'Registration Successful!'});
+                        }
                         res.redirect("/auth/login");
                     });
                 }
@@ -63,8 +65,10 @@ exports.logout =(req, res, next) => {
         req.session.destroy();
         req.logOut();
         res.clearCookie('sessionId');
-        res.status = 210;
-        // res.json({message:'You are successfully logged out!'})
+        if(process.env.NODE_ENV == "local"){
+            res.status = 200;
+            res.json({message:'You are successfully logged out!'})
+        }
         res.redirect('/auth/login');       
         }
         else {
@@ -76,8 +80,10 @@ exports.logout =(req, res, next) => {
 
 exports.isLogIn = (req,res,next) => {
     if (!req.isAuthenticated()) {
-        // return res.status(401).send({ message: "Unauthorized!" });
-        res.redirect('/auth/login');       
+        if(process.env.NODE_ENV == "local"){
+            return res.status(401).send({ message: "Unauthorized!" });
+        }
+        res.redirect('/auth/login');
     }
     next();
 };
