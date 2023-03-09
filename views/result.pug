@@ -1,5 +1,4 @@
 extends ./templates/layout
-//- doctype html
 block content
   head
     style.
@@ -57,7 +56,7 @@ block content
             td
               ul 
                 li #{recipe.title}
-                a(href=recipe.image) See image
+                a(href=recipe.image target="_blank") See image
             td
               ul
                 each ing in recipe.usedIngredients  
